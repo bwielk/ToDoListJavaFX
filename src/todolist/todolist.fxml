@@ -1,12 +1,14 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <BorderPane fx:controller="todolist.Controller"
             xmlns:fx="http://javafx.com/fxml" >
     <left>
-        <ListView fx:id="listViewPane">
+        <ListView fx:id="listViewPane" onMouseClicked="#handleClickListView">
         </ListView>
     </left>
+    <center>
+        <TextArea fx:id="toDoItemView">
+        </TextArea>
+    </center>
 </BorderPane>

@@ -3,7 +3,10 @@ package todolist;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import todolist.datamodel.ToDoItem;
+
+import javax.xml.soap.Text;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,8 @@ public class Controller {
 
     @FXML
     private ListView listViewPane;
+    @FXML
+    private TextArea toDoItemView;
 
     public void initialize(){
         todoItems = new ArrayList<>();
@@ -29,5 +34,11 @@ public class Controller {
         for(int i=0; i<todoItems.size(); i++){
            listViewPane.getItems().add(todoItems.get(i));
         }
+    }
+
+    public void handleClickListView(){
+        ToDoItem selectedItem = (ToDoItem)listViewPane.getSelectionModel().getSelectedItem();
+        System.out.println(selectedItem.getTitle() + " : " + selectedItem.getDescription());
+        toDoItemView.setText(selectedItem.getDescription());
     }
 }
