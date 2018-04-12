@@ -6,18 +6,22 @@ public class ToDoItem {
 
     private String title;
     private String description;
+    private LocalDate dateCreated;
+    private LocalDate dueDate;
 
-    ToDoItem(String title, String description){
+    ToDoItem(String title, String description, LocalDate dateCreated, LocalDate dueDate){
         this.title = title;
         this.description = description;
+        this.dateCreated = dateCreated;
+        this.dueDate = dueDate;
     }
 
-    /*
-    ToDoItem(String title, String description){
+    ToDoItem(String title, String description, LocalDate dueDate){
         this.title = title;
         this.description = description;
-
-    }*/
+        this.dateCreated = LocalDate.now();
+        this.dueDate = dueDate;
+    }
 
     public String getTitle(){
         return title;
@@ -25,5 +29,13 @@ public class ToDoItem {
 
     public String getDescription(){
         return description;
+    }
+
+    public LocalDate getDateCreated(){
+        return dateCreated;
+    }
+
+    public LocalDate getDueDate(){
+        return dueDate;
     }
 }
