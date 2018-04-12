@@ -1,6 +1,7 @@
 package todolist.datamodel;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class ToDoItem {
 
@@ -37,6 +38,10 @@ public class ToDoItem {
 
     public LocalDate getDueDate(){
         return dueDate;
+    }
+
+    public int daysToDueDate(){
+        return Period.between(LocalDate.now(), dueDate).getDays();
     }
 
     @Override

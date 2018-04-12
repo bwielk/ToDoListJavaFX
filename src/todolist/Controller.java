@@ -38,7 +38,11 @@ public class Controller {
 
     public void handleClickListView(){
         ToDoItem selectedItem = (ToDoItem)listViewPane.getSelectionModel().getSelectedItem();
-        System.out.println(selectedItem.getTitle() + " : " + selectedItem.getDescription());
-        toDoItemView.setText(selectedItem.getDescription());
+        StringBuilder content = new StringBuilder();
+        content.append("DESCRIPTION: \n" + selectedItem.getDescription() + "\n\n");
+        content.append("DATE CREATED: \n" + selectedItem.getDateCreated().toString() + "\n\n");
+        content.append("DUE DATE: \n" + selectedItem.getDueDate().toString() + "\n\n");
+        content.append("TIME LEFT TO COMPLETE: \n" + selectedItem.daysToDueDate() + "\n\n");
+        toDoItemView.setText(content.toString());
     }
 }

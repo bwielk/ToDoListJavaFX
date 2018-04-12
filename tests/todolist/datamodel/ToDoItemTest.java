@@ -34,4 +34,9 @@ public class ToDoItemTest {
         assertEquals("2018-04-12", item2.getDateCreated().toString());
         assertEquals("2018-04-15", item2.getDueDate().toString());
     }
+
+    @Test
+    public void taskGeneratesTheNumberOfDaysLeftToItsCompletion(){
+        assertEquals(2, item1.daysToDueDate());
+    }
 }
