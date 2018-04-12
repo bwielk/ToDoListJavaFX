@@ -41,7 +41,7 @@ public class ToDoItem {
     }
 
     public int daysToDueDate(){
-        return Period.between(LocalDate.now(), dueDate).getDays();
+        return Period.between(dateCreated, dueDate).getDays();
     }
 
     @Override

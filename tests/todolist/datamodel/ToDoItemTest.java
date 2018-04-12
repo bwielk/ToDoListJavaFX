@@ -38,5 +38,7 @@ public class ToDoItemTest {
     @Test
     public void taskGeneratesTheNumberOfDaysLeftToItsCompletion(){
         assertEquals(2, item1.daysToDueDate());
+        ToDoItem tempItem = new ToDoItem("Task", "Task Description", LocalDate.of(2018, 10, 20), LocalDate.of(2018, 10, 30));
+        assertEquals(10, tempItem.daysToDueDate());
     }
 }

@@ -1,13 +1,13 @@
 package todolist;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import todolist.datamodel.ToDoItem;
-
-import javax.xml.soap.Text;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +19,12 @@ public class Controller {
     private ListView listViewPane;
     @FXML
     private TextArea toDoItemView;
+    @FXML
+    private Label taskTitle;
+    @FXML
+    private Label taskCreated;
+    @FXML
+    private Label taskDeadline;
 
     public void initialize(){
         todoItems = new ArrayList<>();
@@ -40,9 +46,9 @@ public class Controller {
         ToDoItem selectedItem = (ToDoItem)listViewPane.getSelectionModel().getSelectedItem();
         StringBuilder content = new StringBuilder();
         content.append("DESCRIPTION: \n" + selectedItem.getDescription() + "\n\n");
-        content.append("DATE CREATED: \n" + selectedItem.getDateCreated().toString() + "\n\n");
-        content.append("DUE DATE: \n" + selectedItem.getDueDate().toString() + "\n\n");
-        content.append("TIME LEFT TO COMPLETE: \n" + selectedItem.daysToDueDate() + "\n\n");
         toDoItemView.setText(content.toString());
+        taskTitle.setText(selectedItem.getTitle());
+        taskCreated.setText("Created on " + selectedItem.getDateCreated().toString());
+        taskDeadline.setText("\nThe task deadline is on " + selectedItem.getDueDate() + " \nand you have " + selectedItem.daysToDueDate() + " left to complete it!");
     }
 }
