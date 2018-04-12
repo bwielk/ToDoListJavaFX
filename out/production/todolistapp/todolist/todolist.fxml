@@ -6,7 +6,7 @@
 <BorderPane fx:controller="todolist.Controller"
             xmlns:fx="http://javafx.com/fxml" >
     <left>
-        <ListView>
+        <ListView fx:id="listViewPane">
         </ListView>
     </left>
 </BorderPane>

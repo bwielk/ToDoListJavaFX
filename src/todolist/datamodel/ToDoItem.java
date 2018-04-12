@@ -6,17 +6,17 @@ public class ToDoItem {
 
     private String title;
     private String description;
-    private LocalDate dateCreated;
+    private final LocalDate dateCreated;
     private LocalDate dueDate;
 
-    ToDoItem(String title, String description, LocalDate dateCreated, LocalDate dueDate){
+    public ToDoItem(String title, String description, LocalDate dateCreated, LocalDate dueDate){
         this.title = title;
         this.description = description;
         this.dateCreated = dateCreated;
         this.dueDate = dueDate;
     }
 
-    ToDoItem(String title, String description, LocalDate dueDate){
+    public ToDoItem(String title, String description, LocalDate dueDate){
         this.title = title;
         this.description = description;
         this.dateCreated = LocalDate.now();
@@ -37,5 +37,10 @@ public class ToDoItem {
 
     public LocalDate getDueDate(){
         return dueDate;
+    }
+
+    @Override
+    public String toString(){
+        return title;
     }
 }

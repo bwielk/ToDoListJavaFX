@@ -11,7 +11,6 @@ public class ToDoItemTest {
 
     private ToDoItem item1;
     private ToDoItem item2;
-    private LocalDate currentDate;
 
     @Before
     public void before() {
