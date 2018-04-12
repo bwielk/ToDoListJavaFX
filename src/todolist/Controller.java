@@ -1,4 +1,4 @@
-package sample;
+package todolist;
 
 public class Controller {
 }

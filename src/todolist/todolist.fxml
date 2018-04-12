@@ -1,0 +1,12 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ListView?>
+<BorderPane fx:controller="todolist.Controller"
+            xmlns:fx="http://javafx.com/fxml" >
+    <left>
+        <ListView>
+        </ListView>
+    </left>
+</BorderPane>
