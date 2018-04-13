@@ -8,7 +8,7 @@
 <BorderPane fx:controller="todolist.Controller"
             xmlns:fx="http://javafx.com/fxml" >
     <left>
-        <ListView fx:id="listViewPane" onMouseClicked="#handleClickListView">
+        <ListView fx:id="listViewPane">
         </ListView>
     </left>
     <center>
