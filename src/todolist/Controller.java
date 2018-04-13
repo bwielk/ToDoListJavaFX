@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
+import todolist.datamodel.ToDoData;
 import todolist.datamodel.ToDoItem;
 import java.time.LocalDate;
 import java.time.Month;
@@ -36,6 +37,7 @@ public class Controller {
         todoItems.add(new ToDoItem("John's birthday", "Make that day special", LocalDate.of(2018, 12, 5)));
         todoItems.add(new ToDoItem("Finish the prototypes", "Use Photoshop for that", LocalDate.of(2018, 6, 25)));
         populateListView();
+        ToDoData.getInstance().setToDoItems(todoItems);
         listViewPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {

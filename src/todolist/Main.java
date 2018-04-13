@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import todolist.datamodel.ToDoData;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -14,6 +17,16 @@ public class Main extends Application {
         primaryStage.setTitle("Your To Do List");
         primaryStage.setScene(new Scene(root, 800, 475));
         primaryStage.show();
+    }
+
+    @Override
+    public void stop(){
+        try{
+            ToDoData.getInstance().storeToDoItems();
+
+        }catch(IOException e){
+            System.out.println("Error");
+        }
     }
 
     public static void main(String[] args) {
