@@ -31,7 +31,7 @@ public class ToDoItemTest {
     public void gettersWorkForConstructorWithAutomaticCreationDate(){
         assertEquals("Do it in three days", item2.getTitle());
         assertEquals("Chill out :)", item2.getDescription());
-        assertEquals("2018-04-12", item2.getDateCreated().toString());
+        assertEquals(LocalDate.now().toString(), item2.getDateCreated().toString());
         assertEquals("2018-04-15", item2.getDueDate().toString());
     }
 
@@ -40,5 +40,9 @@ public class ToDoItemTest {
         assertEquals(2, item1.daysToDueDate());
         ToDoItem tempItem = new ToDoItem("Task", "Task Description", LocalDate.of(2018, 10, 20), LocalDate.of(2018, 10, 30));
         assertEquals(10, tempItem.daysToDueDate());
+        ToDoItem tempItem2 = new ToDoItem("Task", "Task Description", LocalDate.of(2019, 10, 30));
+        assertEquals(565, tempItem2.daysToDueDate());
+        ToDoItem tempItem3 = new ToDoItem("Task", "Task Description",LocalDate.of(2018, 04, 13), LocalDate.of(2020, 10, 30));
+        assertEquals(931, tempItem3.daysToDueDate());
     }
 }

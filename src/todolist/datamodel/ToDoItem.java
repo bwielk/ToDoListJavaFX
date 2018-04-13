@@ -2,6 +2,7 @@ package todolist.datamodel;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 public class ToDoItem {
 
@@ -40,8 +41,8 @@ public class ToDoItem {
         return dueDate;
     }
 
-    public int daysToDueDate(){
-        return Period.between(dateCreated, dueDate).getDays();
+    public long daysToDueDate(){
+       return ChronoUnit.DAYS.between(dateCreated, dueDate);
     }
 
     @Override
