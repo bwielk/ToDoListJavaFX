@@ -12,6 +12,7 @@ import todolist.datamodel.ToDoItem;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 
 public class HomeController {
@@ -65,6 +66,15 @@ public class HomeController {
             dialog.getDialogPane().setContent(root);
         }catch(IOException e){
             System.out.println(e.getMessage());
+        }
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("OK pressed");
+        }else{
+            System.out.println("Cancel pressed");
         }
     }
 }

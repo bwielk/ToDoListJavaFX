@@ -16,7 +16,7 @@
         <MenuBar>
             <Menu text="File">
                 <items>
-                    <MenuItem text="Create new item" fx:id="createNewItem"/>
+                    <MenuItem text="Create new item" onAction="#showAddNewItemDialog" fx:id="createNewItem"/>
                     <SeparatorMenuItem/>
                     <MenuItem text="Exit" fx:id="quitApp"/>
                 </items>
