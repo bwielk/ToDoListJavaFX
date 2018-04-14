@@ -5,8 +5,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
-<BorderPane fx:controller="todolist.Controller"
-            xmlns:fx="http://javafx.com/fxml" >
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<BorderPane fx:controller="todolist.HomeController"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:id="homePanel">
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <items>
+                    <MenuItem text="Create new item" fx:id="createNewItem"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Exit" fx:id="quitApp"/>
+                </items>
+            </Menu>
+        </MenuBar>
+    </top>
     <left>
         <ListView fx:id="listViewPane">
         </ListView>

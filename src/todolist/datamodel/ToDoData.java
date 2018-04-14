@@ -42,9 +42,9 @@ public class ToDoData {
                 String dateCreated = itemPieces[2];
                 String dueDate = itemPieces[3];
 
-                //LocalDate dateCr = LocalDate.parse(dateCreated, formatter);
+                LocalDate dateCr = LocalDate.parse(dateCreated, formatter);
                 LocalDate dateDue = LocalDate.parse(dueDate, formatter);
-                ToDoItem newItem = new ToDoItem(title, description/*, dateCr*/, dateDue);
+                ToDoItem newItem = new ToDoItem(title, description, dateCr, dateDue);
                 toDoItems.add(newItem);
             }
         }finally{
@@ -61,7 +61,7 @@ public class ToDoData {
             Iterator<ToDoItem> iterator = toDoItems.iterator();
             while(iterator.hasNext()){
                 ToDoItem item = iterator.next();
-                writer.write(String.format("%s\t%S\t%s\t%s",
+                writer.write(String.format("%s\t%s\t%s\t%s",
                         item.getTitle(),
                         item.getDescription(),
                         item.getDateCreated().format(formatter),
