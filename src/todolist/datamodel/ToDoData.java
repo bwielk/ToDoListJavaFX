@@ -21,19 +21,15 @@ public class ToDoData {
     private DateTimeFormatter formatter; //for Date manipulations
 
     private ToDoData(){
-        formatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+        formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     }
 
     public static ToDoData getInstance(){
         return instance;
     }
 
-    public void setToDoItems(List<ToDoItem> listOfItems){
-        toDoItems = listOfItems;
-    }
-
     public void loadToDoItems() throws IOException{
-        toDoItems = FXCollections.observableArrayList();//
+        toDoItems = FXCollections.observableArrayList();
         Path path = Paths.get(fileName);
         BufferedReader reader = Files.newBufferedReader(path);
         String input;
@@ -46,9 +42,9 @@ public class ToDoData {
                 String dateCreated = itemPieces[2];
                 String dueDate = itemPieces[3];
 
-                LocalDate dateCr = LocalDate.parse(dateCreated, formatter);
+                //LocalDate dateCr = LocalDate.parse(dateCreated, formatter);
                 LocalDate dateDue = LocalDate.parse(dueDate, formatter);
-                ToDoItem newItem = new ToDoItem(title, description, dateCr, dateDue);
+                ToDoItem newItem = new ToDoItem(title, description/*, dateCr*/, dateDue);
                 toDoItems.add(newItem);
             }
         }finally{
@@ -73,11 +69,14 @@ public class ToDoData {
                 ));
                 writer.newLine();
             }
-
         }finally{
             if(writer != null){
                 writer.close();
             }
         }
+    }
+
+    public List<ToDoItem> getToDoItems(){
+        return toDoItems;
     }
 }

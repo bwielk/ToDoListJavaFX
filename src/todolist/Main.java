@@ -20,12 +20,21 @@ public class Main extends Application {
     }
 
     @Override
+    public void init(){
+        try{
+            ToDoData.getInstance().loadToDoItems();
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
     public void stop(){
         try{
             ToDoData.getInstance().storeToDoItems();
 
         }catch(IOException e){
-            System.out.println("Error");
+            System.out.println(e.getMessage());
         }
     }
 

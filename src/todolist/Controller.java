@@ -31,13 +31,13 @@ public class Controller {
     private Label taskDeadline;
 
     public void initialize(){
-        todoItems = new ArrayList<>();
-        todoItems.add(new ToDoItem("Do it in three days", "Chill out :)", LocalDate.of(2019, 4, 15)));
-        todoItems.add(new ToDoItem("See your aunt", "Bring her some cake", LocalDate.of(2019, 3, 1)));
-        todoItems.add(new ToDoItem("John's birthday", "Make that day special", LocalDate.of(2018, 12, 5)));
-        todoItems.add(new ToDoItem("Finish the prototypes", "Use Photoshop for that", LocalDate.of(2018, 6, 25)));
-        populateListView();
-        ToDoData.getInstance().setToDoItems(todoItems);
+//        todoItems = new ArrayList<>();
+//        todoItems.add(new ToDoItem("Do it in three days", "Chill out :)", LocalDate.of(2019, 4, 15)));
+//        todoItems.add(new ToDoItem("See your aunt", "Bring her some cake", LocalDate.of(2019, 3, 1)));
+//        todoItems.add(new ToDoItem("John's birthday", "Make that day special", LocalDate.of(2018, 12, 5)));
+//        todoItems.add(new ToDoItem("Finish the prototypes", "Use Photoshop for that", LocalDate.of(2018, 6, 25)));
+//        populateListView();
+//        ToDoData.getInstance().setToDoItems(todoItems);
         listViewPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -49,6 +49,7 @@ public class Controller {
             }
 
         });
+        listViewPane.getItems().setAll(ToDoData.getInstance().getToDoItems());
         listViewPane.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listViewPane.getSelectionModel().selectFirst();
     }
