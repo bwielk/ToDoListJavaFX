@@ -4,12 +4,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import todolist.datamodel.ToDoData;
 import todolist.datamodel.ToDoItem;
-
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -61,9 +59,10 @@ public class HomeController {
     public void showAddNewItemDialog(){
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(homePanel.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("newFileDialog.fxml"));
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("newFileDialog.fxml"));
-            dialog.getDialogPane().setContent(root);
+            dialog.getDialogPane().setContent(fxmlLoader.load());
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
@@ -72,6 +71,8 @@ public class HomeController {
 
         Optional<ButtonType> result = dialog.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK){
+            DialogController controller = fxmlLoader.getController();
+            controller.processInput();
             System.out.println("OK pressed");
         }else{
             System.out.println("Cancel pressed");

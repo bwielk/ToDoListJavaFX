@@ -1,7 +1,6 @@
 package todolist.datamodel;
 
 import javafx.collections.FXCollections;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -26,6 +25,10 @@ public class ToDoData {
 
     public static ToDoData getInstance(){
         return instance;
+    }
+
+    public List<ToDoItem> getToDoItems() {
+        return toDoItems;
     }
 
     public void loadToDoItems() throws IOException{
@@ -54,6 +57,10 @@ public class ToDoData {
         }
     }
 
+    public void addToDoItem(ToDoItem item){
+        toDoItems.add(item);
+    }
+
     public void storeToDoItems() throws IOException{
         Path path = Paths.get(fileName);
         BufferedWriter writer = Files.newBufferedWriter(path);
@@ -74,9 +81,5 @@ public class ToDoData {
                 writer.close();
             }
         }
-    }
-
-    public List<ToDoItem> getToDoItems(){
-        return toDoItems;
     }
 }
