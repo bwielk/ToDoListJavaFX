@@ -5,10 +5,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import todolist.datamodel.ToDoData;
 import todolist.datamodel.ToDoItem;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -43,6 +47,28 @@ public class HomeController {
         listViewPane.setItems(ToDoData.getInstance().getToDoItems());
         listViewPane.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listViewPane.getSelectionModel().selectFirst();
+        listViewPane.setCellFactory(new Callback<ListView, ListCell>() {
+            @Override
+            public ListCell call(ListView param){
+                ListCell<ToDoItem> cell = new ListCell<ToDoItem>(){
+                    @Override
+                    protected void updateItem(ToDoItem item, boolean empty){
+                        super.updateItem(item, empty);
+                        if(empty){
+                            setText(null);
+                        }else{
+                            setText(item.getTitle());
+                            if(item.getDueDate().equals(LocalDate.now())){
+                                setTextFill(Color.RED);
+                            }else if(item.daysToDueDate()<=10){
+                                setTextFill(Color.DARKORANGE);
+                            }
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
     }
 
     private void displayToDoItemDetails(ToDoItem selectedItem){
