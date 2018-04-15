@@ -29,7 +29,7 @@
     </left>
     <center>
         <VBox>
-            <TextArea fx:id="toDoItemView"/>
+            <TextArea fx:id="toDoItemView" wrapText="true"/>
             <HBox>
                 <VBox>
                     <Label fx:id="taskTitle">

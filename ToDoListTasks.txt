@@ -3,3 +3,8 @@ See your aunt	BRING HER SOME CAKE	14-04-2018	01-03-2019
 John's birthday	MAKE THAT DAY SPECIAL	14-04-2018	05-12-2018
 Finish the prototypes	USE PHOTOSHOP FOR THAT	14-04-2018	25-06-2018
 New Task	This is a new task	15-04-2018	25-04-2018
+New Item	New Item	15-04-2018	24-04-2018
+Take the cat for a walk	Right Now	15-04-2018	19-04-2018
+Another new Item	New Item	15-04-2018	10-04-2024
+Task1	Task number 1	15-04-2018	25-04-2019
+Task2	First item with dataBinding using Observables	15-04-2018	26-04-2018

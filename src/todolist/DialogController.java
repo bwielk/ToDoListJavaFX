@@ -16,11 +16,13 @@ public class DialogController {
     @FXML
     private DatePicker dueDateInput;
 
-    public void processInput(){
+    public ToDoItem processInput(){
         String title = taskTitleInput.getText().trim();
         String description = descriptionInput.getText().trim();
         LocalDate dueDate = dueDateInput.getValue();
 
-        ToDoData.getInstance().addToDoItem(new ToDoItem(title, description, dueDate));
+        ToDoItem newItem = (new ToDoItem(title, description, dueDate));
+        ToDoData.getInstance().addToDoItem(newItem);
+        return newItem;
     }
 }

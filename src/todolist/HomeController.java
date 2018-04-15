@@ -40,7 +40,7 @@ public class HomeController {
             }
 
         });
-        listViewPane.getItems().setAll(ToDoData.getInstance().getToDoItems());
+        listViewPane.setItems(ToDoData.getInstance().getToDoItems());
         listViewPane.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listViewPane.getSelectionModel().selectFirst();
     }
@@ -59,6 +59,8 @@ public class HomeController {
     public void showAddNewItemDialog(){
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(homePanel.getScene().getWindow());
+        dialog.setTitle("Add a new to do item");
+        dialog.setHeaderText("To add a new item, type in its name(or title), description and also choose its due date");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("newFileDialog.fxml"));
         try{
@@ -72,10 +74,9 @@ public class HomeController {
         Optional<ButtonType> result = dialog.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK){
             DialogController controller = fxmlLoader.getController();
-            controller.processInput();
-            System.out.println("OK pressed");
-        }else{
-            System.out.println("Cancel pressed");
+            ToDoItem newItem = controller.processInput();
+            //after adding a new item, the focus goes into it
+            listViewPane.getSelectionModel().select(newItem);
         }
     }
 }

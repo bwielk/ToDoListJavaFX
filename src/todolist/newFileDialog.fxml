@@ -16,7 +16,7 @@
             <Label text="Name the task"/>
             <TextField fx:id="taskTitleInput"/>
             <Label text="Describe the task"/>
-            <TextArea fx:id="descriptionInput"/>
+            <TextArea fx:id="descriptionInput" wrapText="true"/>
             <Label text="Set the due date"/>
             <DatePicker fx:id="dueDateInput"/>
         </VBox>
