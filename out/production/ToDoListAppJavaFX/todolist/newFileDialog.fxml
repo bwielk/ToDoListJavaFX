@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+
+<DialogPane fx:controller="todolist.DialogController"
+            xmlns:fx="http://javafx.com/fxml"
+>
+    <headerText>
+        Sample text
+    </headerText>
+    <content>
+        <VBox>
+            <Label text="Name the task"/>
+            <TextField fx:id="taskTitleInput"/>
+            <Label text="Describe the task"/>
+            <TextArea fx:id="descriptionInput" wrapText="true"/>
+            <Label text="Set the due date"/>
+            <DatePicker fx:id="dueDateInput"/>
+        </VBox>
+    </content>
+</DialogPane>
