@@ -2,10 +2,11 @@ package todolist;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
@@ -31,8 +32,21 @@ public class HomeController {
     private Label taskCreated;
     @FXML
     private Label taskDeadline;
+    @FXML
+    private ContextMenu listContextMenu;
 
     public void initialize(){
+        listContextMenu = new ContextMenu();
+        MenuItem deleteMenuItem = new MenuItem("Delete this item");
+        deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ToDoItem item = (ToDoItem) listViewPane.getSelectionModel().getSelectedItem();
+                deleteItem(item);
+            }
+        });
+        listContextMenu.getItems().addAll(deleteMenuItem);
+
         listViewPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -60,14 +74,23 @@ public class HomeController {
                             setText(item.getTitle());
                             if(item.getDueDate().equals(LocalDate.now())){
                                 setTextFill(Color.RED);
-                            }else if(item.daysToDueDate()<=10){
+                            }else if(item.daysToDueDate()<=10 && item.daysToDueDate() > 0){
                                 setTextFill(Color.DARKORANGE);
+                            }else if(item.daysToDueDate() < 0){
+                                setTextFill(Color.BLUEVIOLET);
                             }
                         }
                     }
                 };
+                cell.emptyProperty().addListener(
+                        (obs, wasEmpty, isNowEmpty) ->{
+                            if(isNowEmpty){
+                                cell.setContextMenu(null);
+                            }else{
+                                cell.setContextMenu(listContextMenu);}
+                            });
                 return cell;
-            }
+            };
         });
     }
 
@@ -103,6 +126,18 @@ public class HomeController {
             ToDoItem newItem = controller.processInput();
             //after adding a new item, the focus goes into it
             listViewPane.getSelectionModel().select(newItem);
+        }
+    }
+
+    public void deleteItem(ToDoItem itemToDelete){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete an item");
+        alert.setHeaderText("Are you sure you would like to delete this item?\n" + "To do item name: " + itemToDelete.getTitle() + "\nItem created on :" + itemToDelete.getDateCreated());
+        alert.getButtonTypes().add(ButtonType.OK);
+        alert.getButtonTypes().add(ButtonType.CANCEL);
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            ToDoData.getInstance().deleteToDoItem(itemToDelete);
         }
     }
 }

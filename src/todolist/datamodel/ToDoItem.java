@@ -43,9 +43,4 @@ public class ToDoItem {
     public long daysToDueDate(){
        return ChronoUnit.DAYS.between(dateCreated, dueDate);
     }
-
-    @Override
-    public String toString(){
-        return title;
-    }
 }
