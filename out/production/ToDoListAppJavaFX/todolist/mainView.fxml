@@ -24,7 +24,7 @@
         </MenuBar>
     </top>
     <left>
-        <ListView fx:id="listViewPane">
+        <ListView fx:id="listViewPane" onKeyPressed="#handleKeyPressed">
         </ListView>
     </left>
     <center>
