@@ -12,6 +12,7 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ToggleButton?>
 <BorderPane fx:controller="todolist.HomeController"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="homePanel">
@@ -33,6 +34,11 @@
                             <Tooltip text="Add a new task so you won't forget about it!"/>
                         </tooltip>
                     </Button>
+                    <ToggleButton text="Today's item" fx:id="filterToggle" onAction="#handleFilterToggle">
+                       <tooltip>
+                           <Tooltip text="Show today's and all items"/>
+                       </tooltip>
+                    </ToggleButton>
                 </HBox>
             </ToolBar>
         </VBox>
