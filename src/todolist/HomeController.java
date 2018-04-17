@@ -2,6 +2,7 @@ package todolist;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import todolist.datamodel.ToDoItem;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Optional;
 
 
@@ -36,6 +38,8 @@ public class HomeController {
     private Label taskDeadline;
     @FXML
     private ContextMenu listContextMenu;
+    @FXML
+    private DatePicker dueDateInput;
 
     public void initialize(){
         listContextMenu = new ContextMenu();
@@ -61,7 +65,16 @@ public class HomeController {
 
         });
 
-        listViewPane.setItems(ToDoData.getInstance().getToDoItems());
+        SortedList<ToDoItem> sortedList = new SortedList<>(ToDoData.getInstance().getToDoItems(),
+                new Comparator<ToDoItem>() {
+                @Override
+                public int compare(ToDoItem o1, ToDoItem o2) {
+                    return o2.getDueDate().compareTo(o1.getDueDate());
+            }
+        });
+
+        //listViewPane.setItems(ToDoData.getInstance().getToDoItems());
+        listViewPane.setItems(sortedList);
         listViewPane.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listViewPane.getSelectionModel().selectFirst();
         listViewPane.setCellFactory(new Callback<ListView, ListCell>() {
@@ -77,7 +90,9 @@ public class HomeController {
                             setText(item.getTitle());
                             if(item.getDueDate().equals(LocalDate.now())){
                                 setTextFill(Color.RED);
-                            }else if(item.daysToDueDate()<=10 && item.daysToDueDate() > 0){
+                            }else if(item.daysToDueDate()==1 || item.daysToDueDate()==2){
+                                setTextFill(Color.CHOCOLATE);
+                            }else if(item.daysToDueDate()<=10 && item.daysToDueDate() > 2){
                                 setTextFill(Color.DARKORANGE);
                             }else if(item.daysToDueDate() < 0){
                                 setTextFill(Color.BLUEVIOLET);

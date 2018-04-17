@@ -9,10 +9,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
 <BorderPane fx:controller="todolist.HomeController"
             xmlns:fx="http://javafx.com/fxml"
             fx:id="homePanel">
     <top>
+        <VBox>
         <MenuBar>
             <Menu text="File">
                 <items>
@@ -22,6 +26,16 @@
                 </items>
             </Menu>
         </MenuBar>
+            <ToolBar>
+                <HBox>
+                    <Button text="Add new item" onAction="#showAddNewItemDialog">
+                        <tooltip>
+                            <Tooltip text="Add a new task so you won't forget about it!"/>
+                        </tooltip>
+                    </Button>
+                </HBox>
+            </ToolBar>
+        </VBox>
     </top>
     <left>
         <ListView fx:id="listViewPane" onKeyPressed="#handleKeyPressed">

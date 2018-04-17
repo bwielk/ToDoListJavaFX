@@ -3,7 +3,7 @@ package todolist.datamodel;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class ToDoItem {
+public class ToDoItem implements Comparable{
 
     private String title;
     private String description;
@@ -42,5 +42,10 @@ public class ToDoItem {
 
     public long daysToDueDate(){
        return ChronoUnit.DAYS.between(dateCreated, dueDate);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
