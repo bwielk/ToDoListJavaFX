@@ -44,6 +44,8 @@ public class HomeController {
     private ToggleButton filterToggle;
 
     private FilteredList<ToDoItem> filteredList;
+    private Predicate<ToDoItem> allItems;
+    private Predicate<ToDoItem> todaysItems;
 
     public void initialize(){
         listContextMenu = new ContextMenu();
@@ -69,6 +71,20 @@ public class HomeController {
 
         });
 
+        allItems = new Predicate<ToDoItem>() {
+            @Override
+            public boolean test(ToDoItem toDoItem) {
+                return true;
+            }
+        };
+
+        todaysItems = new Predicate<ToDoItem>() {
+            @Override
+            public boolean test(ToDoItem toDoItem) {
+                return (toDoItem.getDueDate().equals(LocalDate.now()));
+            }
+        };
+
         SortedList<ToDoItem> sortedList = new SortedList<>(ToDoData.getInstance().getToDoItems(),
                 new Comparator<ToDoItem>() {
                 @Override
@@ -78,12 +94,7 @@ public class HomeController {
         });
 
         //listViewPane.setItems(ToDoData.getInstance().getToDoItems());
-        filteredList = new FilteredList<ToDoItem>(ToDoData.getInstance().getToDoItems(), new Predicate<ToDoItem>() {
-            @Override
-            public boolean test(ToDoItem toDoItem) {
-                return true;
-            }
-        });
+        filteredList = new FilteredList<ToDoItem>(ToDoData.getInstance().getToDoItems(), allItems);
 
         listViewPane.setItems(filteredList);
         listViewPane.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -178,20 +189,22 @@ public class HomeController {
     }
 
     public void handleFilterToggle(){
+        ToDoItem selectedItem = (ToDoItem) listViewPane.getSelectionModel().getSelectedItem();
         if(filterToggle.isSelected()){
-            filteredList.setPredicate(new Predicate<ToDoItem>() {
-                @Override
-                public boolean test(ToDoItem toDoItem) {
-                    return (toDoItem.getDueDate().equals(LocalDate.now()));
-                }
-            });
+            filteredList.setPredicate(todaysItems);
+            if(filteredList.isEmpty()){
+                toDoItemView.clear();
+                taskCreated.setText("");
+                taskDeadline.setText("");
+                taskTitle.setText("");
+            }else if(filteredList.contains(selectedItem)){
+                listViewPane.getSelectionModel().select(selectedItem);
+            }else{
+                listViewPane.getSelectionModel().selectFirst();
+            }
         }else{
-            filteredList.setPredicate(new Predicate<ToDoItem>() {
-                @Override
-                public boolean test(ToDoItem toDoItem) {
-                    return true;
-                }
-            });
+            filteredList.setPredicate(allItems);
+            listViewPane.getSelectionModel().select(selectedItem);
         }
     }
 }
